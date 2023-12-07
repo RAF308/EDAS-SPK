@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import pyDecision
+
 from pyDecision.algorithm import edas_method
 
 st.markdown("<h2 style='text-align: center; color: white;'>Sistem Pendukung Keputusan Menggunakan Evaluation Based on Distance from Average Solution (EDAS)</h2>", unsafe_allow_html=True)
