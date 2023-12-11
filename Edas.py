@@ -139,7 +139,7 @@ button_clicked = st.button('Tampilkan Hasil')
 # Check if the button is clicked
 if button_clicked:
     if alt_value < 2 :
-        st.write("<p style='color: red;'>Harap Tentukan Jumlah Alternatif Terlebih Dahulu!</p>", unsafe_allow_html=True)
+        st.write("<p style='color: red;'>Harap Tentukan Minimal 2 Alternatif Terlebih Dahulu!</p>", unsafe_allow_html=True)
     else :
         #Tabel
         columns = ['Jarak Tempuh', 'Waktu Tempuh', 'Biaya', 'Fasilitas', 'Keramaian']
