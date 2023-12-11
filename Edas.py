@@ -37,14 +37,12 @@ if alt_value != 0:
     #Bobot
     st.header('Bobot :')     
     data_bobot = {
-        'Jarak Tempuh': ['20%'],
-        'Waktu Tempuh': ['20%'],
-        'Biaya': ['30%'],
-        'Fasilitas': ['15%'],
-        'Keramaian': ['15%']
+        'Kriteria': ['Jarak Tempuh', 'Waktu Tempuh', 'Biaya', 'Fasilitas', 'Keramaian'],
+        'Bobot': ['20%', '20%', '30%', '15%', '15%'],
+        'Keterangan': ['Benefit', 'Cost', 'Cost', 'Benefit', 'Benefit'],
     }
-    df_bobot = pd.DataFrame(data_bobot )
-    st.markdown(df_bobot.to_html(index=False), unsafe_allow_html=True)
+    df_bobot = pd.DataFrame(data_bobot).T
+    st.markdown(df_bobot.to_html(index=False, header=None), unsafe_allow_html=True)
     st.markdown("<hr/>", unsafe_allow_html=True)
     
     # Jarak Tempuh
