@@ -4,6 +4,12 @@ import pandas as pd
 
 from pyDecision.algorithm import edas_method
 
+
+st.set_page_config(
+    page_title="SPK EDAS",
+)
+
+st.write('Kelompok 4 SPK - Pagi B')
 st.markdown("<h2 style='text-align: center; color: black;'>Sistem Pendukung Keputusan Rekomendasi Tempat Wisata Untuk Study Tour Menggunakan EDAS</h2>", unsafe_allow_html=True)
 
 # Define array variable
@@ -89,7 +95,7 @@ if alt_value != 0:
     st.title('Perkiraan Biaya (Rp) - C3')
     for i in range(int(alt_value)):
         
-        biaya = st.number_input(f"Perkiraan Biaya ke {alt_name_value[i]}", min_value=2000000, value=2000000, step=1000000)
+        biaya = st.number_input(f"Perkiraan Biaya ke {alt_name_value[i]}", value=2000000, step=1000000)
 
         if biaya <= 2000000:
             c3 = 1
@@ -132,7 +138,7 @@ button_clicked = st.button('Tampilkan Hasil')
 
 # Check if the button is clicked
 if button_clicked:
-    if alt_value == 0 :
+    if alt_value < 2 :
         st.write("<p style='color: red;'>Harap Tentukan Jumlah Alternatif Terlebih Dahulu!</p>", unsafe_allow_html=True)
     else :
         #Tabel
