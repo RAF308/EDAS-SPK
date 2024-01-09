@@ -1,15 +1,12 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-
+import pyDecision
+import plotly.express as px
 from pyDecision.algorithm import edas_method
+from fpdf import FPDF
+import io
 
-
-st.set_page_config(
-    page_title="SPK EDAS",
-)
-
-st.write('Kelompok 4 SPK - Pagi B')
 st.markdown("<h2 style='text-align: center; color: black;'>Sistem Pendukung Keputusan Rekomendasi Tempat Wisata Untuk Study Tour Menggunakan EDAS</h2>", unsafe_allow_html=True)
 
 # Define array variable
@@ -175,5 +172,35 @@ if button_clicked:
                 if second_max_value != 0 :
                     st.write(f'Dan tempat yang direkomendasikan untuk rencana cadangan adalah {second_max_value}')
 
+                # Download Kesimpulan and Perankingan Button
+                combined_pdf = FPDF()
+                combined_pdf.set_auto_page_break(auto=True, margin=15)
+                combined_pdf.add_page()
+                combined_pdf.set_font("Arial", size=12)
 
+                # Add Kesimpulan section
+                combined_pdf.cell(200, 10, txt=f"Kesimpulan:\n\nDari hasil perhitungan yang telah dilakukan, tempat wisata yang direkomendasikan untuk Study Tour adalah {max_value}", ln=True)
+
+                if alt_value > 1:
+                    rank_without_max = np.delete(rank, max_row_index)
+                    second_max_row_index = np.argmax(rank_without_max)
+                    second_max_value = alt_name_value[second_max_row_index]
+
+                    if second_max_value != 0:
+                        combined_pdf.cell(200, 10, txt=f"Dan tempat yang direkomendasikan untuk rencana cadangan adalah {second_max_value}", ln=True)
+
+                # Add Perankingan section
+                combined_pdf.cell(200, 10, txt="\nPerankingan:\n\n", ln=True)
+                combined_pdf.cell(200, 10, txt=rank_df.to_string(index=True), ln=True)
+
+                combined_stream = io.BytesIO(combined_pdf.output(dest='S').encode('latin1'))
+
+                # Download Kesimpulan and Perankingan Button
+                st.download_button(
+                    label="Download Kesimpulan dan Perankingan PDF",
+                    data=combined_stream,
+                    file_name="kesimpulan_perankingan_study_tour.pdf",
+                    mime="application/pdf",
+                    key="download_kesimpulan_perankingan"
+                )
 
