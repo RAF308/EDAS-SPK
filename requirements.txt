@@ -1,3 +1,6 @@
 streamlit
 numpy
 pyDecision
+pandas
+plotly
+fpdf
